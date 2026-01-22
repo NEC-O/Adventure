@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime, JSON
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime, JSON, Text
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 
@@ -12,6 +12,8 @@ class Story(Base):
     title = Column(String, index=True)
     session_id = Column(String, index=True)
     created_at = Column(DateTime(timezone=True), default=func.now())
+    status = Column(String, default="draft")  # draft, completed, failed
+    updated_at = Column(DateTime(timezone=True), default=func.now(), onupdate=func.now())
 
     nodes = relationship("StoryNode", back_populates="story")
 

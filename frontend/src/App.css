@@ -254,10 +254,34 @@ button:hover {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #eee;
+  position: relative;
 }
 
 .story-header h2 {
   color: var(--primary-color);
+}
+
+.story-controls-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.back-btn, .edit-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-btn:hover, .edit-btn:hover {
+  background-color: var(--secondary-color);
 }
 
 .story-content {
@@ -348,6 +372,49 @@ button:hover {
   background-color: #e0e0e0;
 }
 
+.story-path {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  border: 1px solid #e9ecef;
+}
+
+.story-path h4 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.path-nodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.path-node {
+  padding: 0.25rem 0.75rem;
+  background-color: #e9ecef;
+  color: #495057;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.path-node:hover {
+  background-color: #dee2e6;
+  transform: translateY(-1px);
+}
+
+.path-node.current {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  font-weight: bold;
+}
+
 /* Error Message */
 .error-message {
   background-color: #ffebee;
@@ -368,4 +435,49 @@ button:hover {
 
 .error-message button:hover {
   background-color: #d32f2f;
+}
+
+/* Navigation */
+.main-nav {
+  margin-top: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+  background-color: rgba(74, 111, 165, 0.1);
+}
+
+.nav-links a.active {
+  color: var(--primary-color);
+  background-color: rgba(74, 111, 165, 0.15);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background-color: var(--primary-color);
+  border-radius: 1px;
 }
