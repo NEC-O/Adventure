@@ -42,6 +42,10 @@ function StoryLoader() {
         navigate("/")
     }
 
+    const editStory = () => {
+        navigate(`/story/${id}/edit`)
+    }
+
     if (loading) {
         return <LodingStatus theme={"story"} />
     }
@@ -58,7 +62,7 @@ function StoryLoader() {
 
     if (story) {
         return <div className="story-loader">
-            <StoryGame story={story} onNewStory={createNewStory}/>
+            <StoryGame story={story} onNewStory={createNewStory} onEditStory={editStory}/>
         </div>
     }
 }
