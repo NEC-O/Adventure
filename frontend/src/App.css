@@ -25,19 +25,48 @@ body {
 }
 
 .app-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 40px;
 }
 
-header h1 {
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
+h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+nav {
+  margin-top: 20px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav li {
+  display: inline;
+}
+
+nav a {
+  text-decoration: none;
+  color: #2196F3;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+nav a:hover {
+  background-color: #e3f2fd;
 }
 
 footer {
@@ -351,21 +380,273 @@ button:hover {
 /* Error Message */
 .error-message {
   background-color: #ffebee;
-  color: var(--error-color);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
+  color: #c62828;
+  padding: 20px;
+  border-radius: 8px;
   text-align: center;
-  margin-bottom: 2rem;
-}
-
-.error-message p {
-  margin-bottom: 1rem;
 }
 
 .error-message button {
-  background-color: var(--error-color);
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #c62828;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .error-message button:hover {
+  background-color: #b71c1c;
+}
+
+/* Story Manager */
+.story-manager {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.story-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.story-manager-header h2 {
+  font-size: 2em;
+  color: #333;
+}
+
+.stories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.story-item {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.story-info h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.story-info .created-at {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.story-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.play-btn, .edit-btn, .delete-btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.play-btn {
+  background-color: #2196F3;
+  color: white;
+}
+
+.play-btn:hover {
+  background-color: #1976D2;
+}
+
+.edit-btn {
+  background-color: #FF9800;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #FB8C00;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
   background-color: #d32f2f;
+}
+
+.no-stories {
+  text-align: center;
+  padding: 50px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.no-stories p {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Story Editor */
+.story-editor {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.story-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.story-editor-header h2 {
+  font-size: 2em;
+  color: #333;
+}
+
+.story-editor-content {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.node-selector {
+  margin-bottom: 30px;
+}
+
+.node-selector h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.node-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.node-editor h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.content-textarea {
+  width: 100%;
+  padding: 15px;
+  font-size: 1em;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  resize: vertical;
+  margin-bottom: 20px;
+}
+
+.options-editor h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.option-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.option-text, .option-node-id {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.remove-option-btn {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.remove-option-btn:hover {
+  background-color: #d32f2f;
+}
+
+.add-option-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.add-option-btn:hover {
+  background-color: #45a049;
+}
+
+.node-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn, .new-node-btn, .play-btn, .back-btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+.new-node-btn {
+  background-color: #2196F3;
+  color: white;
+}
+
+.new-node-btn:hover {
+  background-color: #1976D2;
+}
+
+.play-btn {
+  background-color: #FF9800;
+  color: white;
+}
+
+.play-btn:hover {
+  background-color: #FB8C00;
+}
+
+.back-btn {
+  background-color: #607D8B;
+  color: white;
+}
+
+.back-btn:hover {
+  background-color: #546E7A;
 }

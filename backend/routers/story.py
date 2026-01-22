@@ -95,6 +95,98 @@ def get_complete_story(story_id: int, db: Session = Depends(get_db)):
     return complete_story
 
 
+@router.get("/list", response_model=list[CompleteStoryResponse])
+def get_story_list(
+    session_id: str = Depends(get_session_id),
+    db: Session = Depends(get_db)
+):
+    stories = db.query(Story).filter(Story.session_id == session_id).order_by(Story.created_at.desc()).all()
+    story_list = []
+    for story in stories:
+        try:
+            complete_story = build_complete_story_tree(db, story)
+            story_list.append(complete_story)
+        except Exception as e:
+            print(f"Error building story {story.id}: {e}")
+    return story_list
+
+
+@router.delete("/{story_id}")
+def delete_story(
+    story_id: int,
+    session_id: str = Depends(get_session_id),
+    db: Session = Depends(get_db)
+):
+    story = db.query(Story).filter(Story.id == story_id, Story.session_id == session_id).first()
+    if not story:
+        raise HTTPException(status_code=404, detail="Story not found")
+    
+    db.query(StoryNode).filter(StoryNode.story_id == story_id).delete()
+    db.delete(story)
+    db.commit()
+    
+    return {"message": "Story deleted successfully"}
+
+
+@router.put("/{story_id}/nodes/{node_id}")
+def update_story_node(
+    story_id: int,
+    node_id: int,
+    content: str,
+    options: Optional[list] = None,
+    is_ending: Optional[bool] = None,
+    is_winning_ending: Optional[bool] = None,
+    session_id: str = Depends(get_session_id),
+    db: Session = Depends(get_db)
+):
+    story = db.query(Story).filter(Story.id == story_id, Story.session_id == session_id).first()
+    if not story:
+        raise HTTPException(status_code=404, detail="Story not found")
+    
+    node = db.query(StoryNode).filter(StoryNode.id == node_id, StoryNode.story_id == story_id).first()
+    if not node:
+        raise HTTPException(status_code=404, detail="Story node not found")
+    
+    node.content = content
+    if options is not None:
+        node.options = options
+    if is_ending is not None:
+        node.is_ending = is_ending
+    if is_winning_ending is not None:
+        node.is_winning_ending = is_winning_ending
+    
+    db.commit()
+    
+    return {"message": "Story node updated successfully"}
+
+
+@router.post("/{story_id}/nodes")
+def create_story_node(
+    story_id: int,
+    content: str,
+    is_ending: Optional[bool] = False,
+    is_winning_ending: Optional[bool] = False,
+    session_id: str = Depends(get_session_id),
+    db: Session = Depends(get_db)
+):
+    story = db.query(Story).filter(Story.id == story_id, Story.session_id == session_id).first()
+    if not story:
+        raise HTTPException(status_code=404, detail="Story not found")
+    
+    new_node = StoryNode(
+        story_id=story_id,
+        content=content,
+        is_ending=is_ending,
+        is_winning_ending=is_winning_ending,
+        options=[]
+    )
+    
+    db.add(new_node)
+    db.commit()
+    
+    return {"message": "Story node created successfully", "node_id": new_node.id}
+
+
 def build_complete_story_tree(db: Session, story: Story) -> CompleteStoryResponse:
     nodes = db.query(StoryNode).filter(StoryNode.story_id == story.id).all()
 
